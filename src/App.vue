@@ -3,13 +3,11 @@
     <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
         <v-flex xs12>
-          <h1>HK Lenon Wall Map Visualization</h1>
+          <h1 class="text-sm-left">HK Lenon Wall Map Visualization</h1>
         </v-flex>
-        <v-flex xs4></v-flex>
-        <v-flex xs4>
+        <v-flex xs12>
           <MyMap class="text-md-center" />
         </v-flex>
-        <v-flex xs4></v-flex>
       </v-layout>
     </v-container>
   </div>

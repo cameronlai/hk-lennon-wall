@@ -2,12 +2,15 @@
   <div>
     <l-map style="width: 500px; height: 500px;" :zoom="zoom" :center="center">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-      <l-marker :lat-lng="marker">
-        <l-popup :content="text">
+      <l-marker v-for="item in items" :lat-lng="item.marker">
+        <l-popup>
+          <div style="width: 200px;">
+            <h2>{{item.location}} by {{item.author}}</h2>
+            <a :href="item.webUrl" target="_blank">
+            <v-img :src="item.photoUrl"></v-img>
+            </a>
+          </div>
         </l-popup>
-      </l-marker>
-      <l-marker :lat-lng="marker2">
-        <l-popup :content="text2"></l-popup>
       </l-marker>
     </l-map>
   </div>
@@ -16,12 +19,7 @@
 <script>
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 import L from "leaflet";
-
-const markers1 = [
-  { position: { lng: 22.35, lat: 114.1 } },
-  { position: { lng: -1.571045, lat: 47.457809 } },
-  { position: { lng: -1.560059, lat: 47.739323 } }
-];
+import mapData from "@/data/MapData.json";
 
 export default {
   name: "MyMap",
@@ -44,10 +42,18 @@ export default {
       marker: L.latLng(22.35, 114.1),
       text: "this is a marker",
       marker2: L.latLng(22.35, 114.2),
-      text2: "this is a marker 2"
+      text2: "this is a marker 2",
+      items: []
     };
   },
   mounted: function() {
+    for (var i = 0; i < mapData.length; i++) {
+      var item = mapData[i];
+      console.log(item);
+      item.marker = L.latLng(item.lat, item.long);
+      this.items.push(item);
+    }
+    console.log(mapData);
     //console.log('mounted');
   }
 };
