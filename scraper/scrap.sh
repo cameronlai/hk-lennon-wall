@@ -1,0 +1,1 @@
+instagram-scraper --tag 連儂牆 --media-type none --include-location --metadata
