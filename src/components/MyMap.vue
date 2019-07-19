@@ -19,7 +19,7 @@
 <script>
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 import L from "leaflet";
-import mapData from "@/data/MapData2.json";
+import mapData from "@/data/MapData.json";
 
 export default {
   name: "MyMap",
