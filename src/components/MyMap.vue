@@ -5,7 +5,7 @@
       <l-marker v-for="item in items" :lat-lng="item.marker">
         <l-popup>
           <div style="width: 200px;">
-            <h2>{{item.location}} by {{item.author}}</h2>
+            <h2>{{item.location}} by {{item.full_name}}</h2>
             <a :href="item.webUrl" target="_blank">
             <v-img :src="item.photoUrl"></v-img>
             </a>
