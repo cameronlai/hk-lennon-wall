@@ -19,7 +19,7 @@
 <script>
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 import L from "leaflet";
-import mapData from "@/data/MapData.json";
+import mapData from "@/data/MapData2.json";
 
 export default {
   name: "MyMap",
@@ -50,7 +50,7 @@ export default {
     for (var i = 0; i < mapData.length; i++) {
       var item = mapData[i];
       console.log(item);
-      item.marker = L.latLng(item.lat, item.long);
+      item.marker = L.latLng(item.lat, item.lng);
       this.items.push(item);
     }
     console.log(mapData);
