@@ -15,12 +15,15 @@
                 target="_blank"
               >{{item.fullname}}</a>
             </div>
-            <div class="font-weight-thin my-2 body-1">
-              {{item.likes}} Likes
-            </div>
-            <a :href="item.webUrl" target="_blank">
+            <div class="font-weight-thin my-2 body-1">{{item.likes}} Likes</div>
+            <a :href="'https://www.instagram.com/p/' + item.shortcode" target="_blank">
               <v-img :src="'https://instagram.com/p/' + item.shortcode + '/media/?size=t'"></v-img>
             </a>
+            <div class="font-weight-thin my-2 body-1">
+              {{item.index}} / {{item.n}}
+              <v-btn v-on:click="nextImage(item, -1)">{{ icons.mdiAccount }}</v-btn>
+              <v-btn v-on:click="nextImage(item, 1)">Next</v-btn>
+            </div>
           </div>
         </l-popup>
       </l-marker>
@@ -41,9 +44,6 @@ export default {
     LMarker,
     LPopup
   },
-  props: {
-    msg: String
-  },
   data() {
     return {
       zoom: 11,
@@ -51,23 +51,38 @@ export default {
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      marker: L.latLng(22.35, 114.1),
-      text: "this is a marker",
-      marker2: L.latLng(22.35, 114.2),
-      text2: "this is a marker 2",
       items: []
     };
   },
   mounted: function() {
+    var done = false;
+    var targetGroup = 0;
     for (var i = 0; i < mapData.length; i++) {
-      var item = mapData[i];
-      item.marker = L.latLng(item.lat, item.lng);
-      item.mediaurl =
-        "https://instagram.com/p/" + item.shortcode + "/media/?size=t";
-      this.items.push(item);
+      var item = {};
+      for (var k in mapData[i]) item[k] = mapData[i][k];
+      if (item.group == targetGroup) {
+        item.marker = L.latLng(item.lat, item.lng);
+        item.index = 1;
+        item.startPos = i;
+        this.items.push(item);
+        targetGroup++;
+      }
     }
   },
-  methods: {}
+  methods: {
+    nextImage: function(selectedItem, dir) {
+      var newIndex = selectedItem.index + dir;
+      if (newIndex > selectedItem.n || newIndex == 0) {
+        console.log("leave");
+        return;
+      }
+
+      selectedItem.index = selectedItem.index + dir;
+      var lookupIndex = selectedItem.index + selectedItem.startPos - 1;
+      var newItem = mapData[lookupIndex];
+      for (var k in newItem) selectedItem[k] = newItem[k];
+    }
+  }
 };
 </script>
 
