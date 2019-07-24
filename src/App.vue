@@ -3,10 +3,10 @@
     <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
         <v-flex xs12>
-          <h1 class="text-sm-left">HK Lenon Wall Map Visualization</h1>
+          <div class="flex display-2 font-weight-black">HK Lenon Wall Map</div>
         </v-flex>
         <v-flex xs12>
-          <MyMap class="text-md-center" />
+          <my-map></my-map>
         </v-flex>
       </v-layout>
     </v-container>
@@ -20,17 +20,13 @@ export default {
   name: "app",
   components: {
     MyMap
-  }
+  },
+  data() {},
+  methods: {}
 };
 </script>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
 </style>
+

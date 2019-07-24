@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <l-map style="width: 500px; height: 500px;" :zoom="zoom" :center="center">
+  <div style="width: 100%; height: 500px;">
+    <l-map :zoom="zoom" :center="center">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-      <l-marker v-for="item in items" :lat-lng="item.marker">
+      <l-marker v-for="item in items" :lat-lng="item.marker" :key="item.shortCode">
         <l-popup>
-          <div style="width: 200px;">
-            <h2>{{item.location}} by {{item.full_name}}</h2>
+          <div style="width: 250px;">
+            <div class="font-weight-thin my-2 title">{{item.location}} by {{item.full_name}}</div>
             <a :href="item.webUrl" target="_blank">
-            <v-img :src="item.photoUrl"></v-img>
+              <v-img :src="item.photoUrl"></v-img>
             </a>
           </div>
         </l-popup>
@@ -49,30 +49,16 @@ export default {
   mounted: function() {
     for (var i = 0; i < mapData.length; i++) {
       var item = mapData[i];
-      console.log(item);
       item.marker = L.latLng(item.lat, item.lng);
+      item.photoUrl =
+        "https://instagram.com/p/" + item.shortCode + "/media/?size=t";
       this.items.push(item);
     }
-    console.log(mapData);
-    //console.log('mounted');
-  }
+  },
+  methods: {}
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>
