@@ -5,9 +5,21 @@
       <l-marker v-for="item in items" :lat-lng="item.marker" :key="item.shortCode">
         <l-popup>
           <div style="width: 250px;">
-            <div class="font-weight-thin my-2 title">{{item.location}} by {{item.full_name}}</div>
+            <div class="font-weight-thin my-2 body-1">
+              <a
+                :href="'https://www.instagram.com/p/' + item.shortcode"
+                target="_blank"
+              >{{item.location}}</a> by
+              <a
+                :href="'https://www.instagram.com/' + item.username"
+                target="_blank"
+              >{{item.fullname}}</a>
+            </div>
+            <div class="font-weight-thin my-2 body-1">
+              {{item.likes}} Likes
+            </div>
             <a :href="item.webUrl" target="_blank">
-              <v-img :src="item.photoUrl"></v-img>
+              <v-img :src="'https://instagram.com/p/' + item.shortcode + '/media/?size=t'"></v-img>
             </a>
           </div>
         </l-popup>
@@ -50,8 +62,8 @@ export default {
     for (var i = 0; i < mapData.length; i++) {
       var item = mapData[i];
       item.marker = L.latLng(item.lat, item.lng);
-      item.photoUrl =
-        "https://instagram.com/p/" + item.shortCode + "/media/?size=t";
+      item.mediaurl =
+        "https://instagram.com/p/" + item.shortcode + "/media/?size=t";
       this.items.push(item);
     }
   },
