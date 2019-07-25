@@ -1,4 +1,4 @@
-# lenon-wall
+# lennon-wall
 
 ## Project setup
 ```
