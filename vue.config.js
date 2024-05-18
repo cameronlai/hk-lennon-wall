@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: 'hk-lenon-wall'
+    publicPath: '/hk-lennon-wall'
 } 
