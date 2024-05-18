@@ -21,7 +21,7 @@
             </a>
             <div class="font-weight-thin my-2 body-1">
               {{item.index}} / {{item.n}}
-              <v-btn v-on:click="nextImage(item, -1)">{{ icons.mdiAccount }}</v-btn>
+              <v-btn v-on:click="nextImage(item, -1)">Prev</v-btn>
               <v-btn v-on:click="nextImage(item, 1)">Next</v-btn>
             </div>
           </div>
@@ -55,7 +55,6 @@ export default {
     };
   },
   mounted: function() {
-    var done = false;
     var targetGroup = 0;
     for (var i = 0; i < mapData.length; i++) {
       var item = {};
@@ -73,7 +72,6 @@ export default {
     nextImage: function(selectedItem, dir) {
       var newIndex = selectedItem.index + dir;
       if (newIndex > selectedItem.n || newIndex == 0) {
-        console.log("leave");
         return;
       }
 
