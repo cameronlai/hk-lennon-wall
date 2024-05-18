@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "gh-pages": "^6.1.1",
     "leaflet": "^1.5.1",
     "vue": "^2.6.10",
     "vue2-leaflet": "^2.1.1",
